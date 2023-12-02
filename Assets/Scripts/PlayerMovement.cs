@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject tutorial;
     private Rigidbody2D rb;
     public float speed;
     public float jumpForce;
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
+            tutorial.SetActive(false);
             isJumpimg = true;
             jumpTimeCounter = jumpTime;
             rb.velocity = Vector2.up * jumpForce;

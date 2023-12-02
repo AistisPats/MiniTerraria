@@ -4,26 +4,25 @@ using UnityEngine;
 
 public class spawner : MonoBehaviour
 {
+    public GameObject sc;
     public GameObject slime;
     public Transform PlayerPos;
     public GameObject smallSlime;
     public float delay;
     private float timer = 0;
 
+
     void Update()
     {
         timer += Time.deltaTime;
         if (timer > delay)
         {
-            GameObject s = Instantiate(slime, transform);
-            s.GetComponent<SlimeMovement>().PlayerPos = PlayerPos;
-            s.GetComponent<SlimeHealth>().Spawner = gameObject;
+            var s = Instantiate(sc, transform);
+            var scRef = s.GetComponent<SlimeController>();
+            scRef.Slime = slime;
+            scRef.SmallSlime = smallSlime;
+            scRef.PlayerPosition = PlayerPos;
             timer -= delay;
         }
-    }
-    public void CreateSmallSlime(Transform pos)
-    {
-        GameObject s = Instantiate(smallSlime, pos);
-        s.GetComponent<SlimeMovement>().PlayerPos = PlayerPos;
     }
 }
